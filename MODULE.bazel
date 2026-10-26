@@ -49,8 +49,8 @@ bazel_dep(
 )
 archive_override(
     module_name = "opentitan_devbundle",
-    integrity = "sha256-S2imkKyI/F4wobvLAQ33g9RIlgtiE1lrPnMerRfP19M=",
-    url = "https://github.com/lowRISC/opentitan/releases/download/devbundle-2026-10-15-1/devbundle.tar.xz",
+    integrity = "sha256-eJtAeJs9ycdgh6AMifH8cazSKTnFGuOUKeI3m3xBxwI=",
+    url = "https://github.com/lowRISC/opentitan/releases/download/devbundle-2026-10-21-1/devbundle.tar.xz",
 )
 
 # Test dependencies
