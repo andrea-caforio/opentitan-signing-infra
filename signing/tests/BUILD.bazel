@@ -252,8 +252,8 @@ OFFLINE_TEST_VARIANTS = {
     for name, (ecdsa_key, spx_key, spx_domain) in OFFLINE_TEST_VARIANTS.items()
 ]
 
-# SPHINCS+ signing uses a non-deterministic optrand, so we cannot expect the signed
-# binaries that are produced to look the same.
+# SPHINCS+ / SLH-DSA signing uses a non-deterministic optrand, so we cannot expect the
+# signed binaries that are produced to look the same.
 #
 # OpenTitanTool currently uses deterministic ECDSA signing (RFC6979), so we can compare
 # to a checked-in binary for ECDSA-only signing. If OpenTitanTool is modified to use
