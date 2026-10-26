@@ -32,7 +32,7 @@ These steps still worked as of commit [`f55b9a296da51ec62a0d7d883ec36340e54d8ddf
     ```sh
     bazelisk cquery //sw/device/silicon_creator/rom_ext:rom_ext_dice_x509_slot_a 2>/dev/null \
        | grep "rom_ext_dice_x509_slot_a_.*\.app_prod_0\.app_prod_0\.signed\.bin$" \
-       | xargs -I {} cp {} $SIGNING_REPO_PATH/signing/tests
+       | xargs -I {} cp "$(bazelisk info execution_root)/{}" $SIGNING_REPO_PATH/signing/tests
     ```
 
 6. Build a Bazel target with a corrupted signature:
@@ -43,7 +43,7 @@ These steps still worked as of commit [`f55b9a296da51ec62a0d7d883ec36340e54d8ddf
 7. Copy across and replace the existing corrupted binary:
     ```sh
     bazelisk cquery //sw/device/silicon_creator/rom/e2e:empty_test_slot_a_corrupted_fpga_cw310_rom_with_fake_keys.prod_key_0.signed.bin 2>/dev/null \
-       | xargs -I {} cp {} $SIGNING_REPO_PATH/signing/tests
+       | xargs -I {} cp "$(bazelisk info execution_root)/{}" $SIGNING_REPO_PATH/signing/tests
     ```
 
 8. Build a Bazel target with the unsigned empty test binary:
@@ -55,7 +55,7 @@ These steps still worked as of commit [`f55b9a296da51ec62a0d7d883ec36340e54d8ddf
     ```sh
     bazelisk cquery //sw/device/silicon_creator/rom/e2e:empty_test_slot_a_unsigned 2>/dev/null \
        | grep "empty_test_slot_a_unsigned_fpga_cw310.bin" \
-       | xargs -I {} cp {} $SIGNING_REPO_PATH/signing/tests
+       | xargs -I {} cp "$(bazelisk info execution_root)/{}" $SIGNING_REPO_PATH/signing/tests
     ```
 
 10. Build a Bazel target for the ROM_EXT manifest:
@@ -66,11 +66,12 @@ These steps still worked as of commit [`f55b9a296da51ec62a0d7d883ec36340e54d8ddf
 11. Copy across and replace the existing `manifest.json`:
     ```sh
     bazelisk cquery //sw/device/silicon_creator/rom_ext:manifest 2>/dev/null \
-       | xargs -I {} cp {} $SIGNING_REPO_PATH/signing/tests
+       | xargs -I {} cp "$(bazelisk info execution_root)/{}" $SIGNING_REPO_PATH/signing/tests
     ```
 
 12. Verify that everything still works by running
     ```sh
+    cd $SIGNING_REPO_PATH
     bazelisk test //signing/tests/...
     ```
 
